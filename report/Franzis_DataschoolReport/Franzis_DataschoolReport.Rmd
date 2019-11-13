@@ -1,0 +1,154 @@
+---
+title: Benthic habitats and VME fauna on the Tasmanian Seamounts
+subtitle: Report of Data School FOCUS learnings
+author:  Franziska Althaus
+affiliation: CSIRO Oceans & Atmosphere # Or group/team
+photo: resources/img/FA.jpeg
+
+short_title: Seamount habitats
+
+output: 
+  DSreport::project_summary:
+    code_folding: hide
+
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  results = 'asis',
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.align = 'center'
+)
+
+#Load libraries
+library(tidyverse)
+library(gapminder)
+library(kableExtra)
+
+# read in the data I have tidied up in a separate R-project #(https://github.com/FranzisGIT/IN2018_V06_stills.git)
+
+PCcoverbyImage <- read_csv("../../results/PCcoverbyImage.csv")
+PC_cover <- read_csv("../../results/PCcover.csv")
+
+VMEanno_DensQ <- read_csv("../../results/VMEanno_DensQ.csv")
+VMEanno_PCcoral <- read_csv("../../results/VMEanno_PCcoral.csv")
+VMEannoMatrix <- read_csv("../../results/VMEannoMatrix.csv")
+
+
+```
+
+
+# Introduction
+I work in CSIRO Oceans and Atmosphere on deep-sea observational data from the outer continental shelf and the continental slope. 
+
+# My Project
+My current project is analysing still images of the seafloor on seamounts south of Tasmania, collected using a towed camera system. The images are annotated for (1) percent cover of substrate types, including non-biotic rocks, sediments etc and a matrix forming stony coral, distinguished into live and dead fractions; and (2) for density (number of individuals per m^2^) of taxa considered indicators for vulnerable marine ecosystems (VMEs).
+
+## Preliminary results
+
+In total xxx images have been selected for annotation which is done in separate software and still ongoing. Through data school I have developed scripts to automate reading, tidying up and quality assuring the output data from the annotation software. To date `r nrow(PCcoverbyImage)` images have been annotated for percent cover of substrate types, `r nrow(VMEannoMatrix)` have been annotated for VME taxa. 
+
+- Number of annotations: PC cover; VME taxa
+- distribution of substrate types over depths
+- etc
+
+```{r mytable, out.width='100%', echo = T}
+
+# check out the substrate codes that were annotated
+
+PCsum <- PC_cover %>% 
+  group_by(L2_Code) %>% 
+  summarise(meanPCcover= mean(PC_cover), PresNo_Images = n())
+
+kable(PCsum [1:3], caption="Summary of the data distribution across the targeted substrate types")
+
+```
+
+
+The depth distribution of the live and dead coral matrix are of particular interest in looking at the depth distribution of the substrate types. 
+
+```{r MyFig1, fig.cap="Depth distribution of substrate types summary graph"}
+#distribution of the substrate types
+# create a vector with the sequence of the substrate types for ordering them in a meaningful way
+SubstSeq <- c('SC-ENLP',
+              'SU-ENLP',
+              'SC-SOL',
+              'SU-SOL',
+              'SC-MAD',
+              'SU-MAD',
+              'SU-BCOR',
+              'SU-BBAR',
+              'SU-BOTH',
+              'SU-ROK',
+              'SU-BOL',
+              'SU-COB',
+              'SU-CONBIO',
+              'SU-PEBGRAV',
+              'SU-SAMU',
+              'NS')
+ggplot(PC_cover,
+       mapping= aes(x=factor(L2_Code, level =SubstSeq),              #call the pre existing vector
+                    y=depth,
+                    size=PC_cover)
+  )+
+  geom_point(alpha=0.2)+
+  scale_y_reverse() +                            # reverse y-axis because it represents ocean depth 
+  theme(axis.text.x = element_text(angle = 90))+   # rotate the label on x-axis
+  labs(x="substrate type", y="depth")
+```
+
+```{r MyFig2, fig.cap="Depth distribution of sCoral matrix"}
+PC_cover %>% 
+  filter(L2_Code == "SC-SOL" |
+         L2_Code == "SU-SOL"  ) %>% 
+  ggplot(aes(x = depth,
+             y = PC_cover))+
+  geom_point(alpha=0.2)+
+  facet_wrap(~L2_Code)
+
+```
+
+```
+
+
+Your figure and table captions are automatically numbered and can be referenced in the text
+if needed: see eg. Table \@ref(tab:mytable) and Figure \@ref(fig:standard-plot)
+
+# My Digital Toolbox
+
+What digital tools have you been using in your project? Which ones have you learned since starting 
+Data School?
+
+You can use all the usual R markdown features in writing a project summary, including lists:
+
+* R - dplyr, ggplot, ...
+* Python
+* SQL
+
+## Favourite tool (optional)
+
+Is there a tool/package/function in particular that you've enjoyed using? Give it a special shout out here.
+
+![](https://raw.githubusercontent.com/tidyverse/ggplot2/master/man/figures/logo.png){.pull-right width=100px}
+
+No prizes for guessing mine:
+
+# My time went ...
+
+What parts of the project took the most time and effort? Were there any surprising challenges you
+encountered, and how did you solve them?
+
+# Next steps
+
+What further steps do you wish your project could take? Or are there any new digital skills that you
+are keen to develop as a result of your involvement in the Data School?
+
+# My Data School Experience
+
+This poster is mostly about your synthesis project. However we would also like to hear about other
+parts of your Data School experience. What aspects of the program did you really enjoy? How have you
+been applying the skills you have learned in your daily work? Have you been able to transfer this 
+knowledge to your team members? Concrete examples demonstrating this would be useful here
+(meetings/talks/collaborations/new roles). Any descriptions of the personal impact the program has 
+had are welcome here as well!
