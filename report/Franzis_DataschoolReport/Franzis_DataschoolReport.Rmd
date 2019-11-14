@@ -35,7 +35,6 @@ VMEanno_DensQ <- read_csv("../../results/VMEanno_DensQ.csv")
 VMEanno_PCcoral <- read_csv("../../results/VMEanno_PCcoral.csv")
 VMEannoMatrix <- read_csv("../../results/VMEannoMatrix.csv")
 
-
 ```
 
 
@@ -47,13 +46,11 @@ My current project is analysing still images of the seafloor on seamounts south 
 
 ## Preliminary results
 
-In total xxx images have been selected for annotation which is done in separate software and still ongoing. Through data school I have developed scripts to automate reading, tidying up and quality assuring the output data from the annotation software. To date `r nrow(PCcoverbyImage)` images have been annotated for percent cover of substrate types, `r nrow(VMEannoMatrix)` have been annotated for VME taxa. 
+In total 6100 images have been selected for annotation which is done in separate software and still ongoing. To date `r nrow(PCcoverbyImage)` images have been annotated for percent cover of substrate types, `r nrow(VMEannoMatrix)` have been annotated for VME taxa. 
 
-- Number of annotations: PC cover; VME taxa
-- distribution of substrate types over depths
-- etc
+Preliminary summaries show 
 
-```{r mytable, out.width='100%', echo = T}
+```{r mytable,  echo = T}
 
 # check out the substrate codes that were annotated
 
@@ -61,14 +58,14 @@ PCsum <- PC_cover %>%
   group_by(L2_Code) %>% 
   summarise(meanPCcover= mean(PC_cover), PresNo_Images = n())
 
-kable(PCsum [1:3], caption="Summary of the data distribution across the targeted substrate types")
-
+kable(PCsum [1:3], caption="Summary of the data distribution across the targeted substrate types") %>% 
+  kable_styling("striped", full_width = F)
 ```
 
 
 The depth distribution of the live and dead coral matrix are of particular interest in looking at the depth distribution of the substrate types. 
 
-```{r MyFig1, fig.cap="Depth distribution of substrate types summary graph"}
+```{r MyFig1,  out.width='60%', fig.align='center', fig.height= 4, fig.width=6,fig.cap="Depth distribution of substrate types summary graph"}
 #distribution of the substrate types
 # create a vector with the sequence of the substrate types for ordering them in a meaningful way
 SubstSeq <- c('SC-ENLP',
@@ -98,7 +95,9 @@ ggplot(PC_cover,
   labs(x="substrate type", y="depth")
 ```
 
-```{r MyFig2, fig.cap="Depth distribution of sCoral matrix"}
+
+
+```{r MyFig2, fig.align='center', fig.height= 4, fig.width=6, fig.cap="Depth distribution of sCoral matrix"}
 PC_cover %>% 
   filter(L2_Code == "SC-SOL" |
          L2_Code == "SU-SOL"  ) %>% 
@@ -109,32 +108,15 @@ PC_cover %>%
 
 ```
 
-```
-
-
-Your figure and table captions are automatically numbered and can be referenced in the text
-if needed: see eg. Table \@ref(tab:mytable) and Figure \@ref(fig:standard-plot)
 
 # My Digital Toolbox
 
-What digital tools have you been using in your project? Which ones have you learned since starting 
-Data School?
+Through data school I have developed scripts using R Tidyverse to automate reading, tidying up and quality checking the data extracts from SQL queries in the ORACLE databae and from direct software outputs.
 
-You can use all the usual R markdown features in writing a project summary, including lists:
+MarkDown is a useful tool for presenting data summaries and initial plot and analyses to collaborators.
 
-* R - dplyr, ggplot, ...
-* Python
-* SQL
 
-## Favourite tool (optional)
-
-Is there a tool/package/function in particular that you've enjoyed using? Give it a special shout out here.
-
-![](https://raw.githubusercontent.com/tidyverse/ggplot2/master/man/figures/logo.png){.pull-right width=100px}
-
-No prizes for guessing mine:
-
-# My time went ...
+# My time went
 
 What parts of the project took the most time and effort? Were there any surprising challenges you
 encountered, and how did you solve them?
