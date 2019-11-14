@@ -47,9 +47,9 @@ My current project is analysing still images of the seafloor on seamounts south 
 
 ## Preliminary results
 
-In total 6100 images have been selected for annotation which is done in separate software and still ongoing. To date `r nrow(PCcoverbyImage)` images have been annotated for percent cover of substrate types, `r nrow(VMEannoMatrix)` have been annotated for VME taxa. 
+In total 6100 images have been selected for annotation which is done in separate software and still ongoing. To date `r nrow(PCcoverbyImage)` images have been annotated for percent cover of substrate types in TransectMeasure software from [SEAGIS](https://www.seagis.com.au/), and `r nrow(VMEannoMatrix)` have been annotated for VME taxa in the CSIRO insidence of the MBARI developed Video Annotation and Registration System ([VARS](http://vars.it.csiro.au/)). 
 
-Combinig the percent cover and density data into a by-image data metrix is a useful output for taking the data into QGIS for mapping visualisations.
+Combinig the percent cover and density data into a by-image data matrix is a useful output for taking the data into [QGIS](https://qgis.org/en/site/) for mapping visualisations.
 
 
 ```{r Combine_Anno, echo=T}
@@ -214,15 +214,24 @@ VMEonly_TotDens %>%
 
 # My Digital Toolbox
 
-Through data school I have developed scripts using R Tidyverse to automate reading, tidying up and quality checking the data extracts from SQL queries in the ORACLE databae and from direct software outputs.
+My digital toolbox includes:
 
-MarkDown is a useful tool for presenting data summaries and initial plot and analyses to collaborators.
+- SQL: DB-visualiser and ORACLE
+- R: tidyverse, dplyr, ggplot, knitr
+- Markdown
+- QGIS
+
+Through data school I have developed scripts using **R tidyverse** to automate reading, tidying up and quality checking the data extracts from **SQL** queries in the ORACLE database and from direct software outputs.
+
+**MarkDown** with **knitr** is a useful tool for describing the data QC process and presenting data summaries, initial plots (**ggplot**) and analyses to collaborators.
+
+Having automated processing into consistent data outputs facilitates data visualisations in **R** and **QGIS**, and summaries while annotations are still in progress.
+
 
 
 # My time went
 
-What parts of the project took the most time and effort? Were there any surprising challenges you
-encountered, and how did you solve them?
+Much of my time was spent creating scripts for tidying up the data outputs from TransectMesure andVARS into a format that is amenable for analysis and plotting in R and input to QGIS.
 
 # Next steps
 
