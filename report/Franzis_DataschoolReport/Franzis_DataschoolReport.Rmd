@@ -234,8 +234,8 @@ Much of my time was spent creating scripts for tidying up the data outputs from 
 # Next steps
 
 In the near future I want to hone my skills in using R for data wrangling and tidying futher for use with my image data projects, and introduce some of these tools into our workflow. 
-I can see the potential in using R and Markdown for new work we have identified in my team and I am keen to further explore this.
-I also want to apply my new skills to understand and use R projects, BitBucket repositories and Markdown documents colleagues have ceated under another project I am involved in. This will hopefully lead to my taking over some of the tasks previously done by my colleagues.  
+I want to apply my new skills to understand and use R projects, BitBucket repositories and Markdown documents colleagues have ceated under another project I am involved in. This will hopefully lead to my taking over some of the tasks previously done by my colleagues. 
+I can see the potential in using R and Markdown for new work we have identified in my team, creating a series of 'reports' all following the same outline and template. I am keen to further explore this further.
 
 # My Data School Experience
 
