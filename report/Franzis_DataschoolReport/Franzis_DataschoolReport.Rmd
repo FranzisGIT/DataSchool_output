@@ -239,9 +239,4 @@ I can see the potential in using R and Markdown for new work we have identified 
 
 # My Data School Experience
 
-This poster is mostly about your synthesis project. However we would also like to hear about other
-parts of your Data School experience. What aspects of the program did you really enjoy? How have you
-been applying the skills you have learned in your daily work? Have you been able to transfer this 
-knowledge to your team members? Concrete examples demonstrating this would be useful here
-(meetings/talks/collaborations/new roles). Any descriptions of the personal impact the program has 
-had are welcome here as well!
+I liked the format of Data School, it allowed me to get past my initial hesitations about using R andthe code based environment. As mentioned throughout this document, I an see many applications of my new found knowledge in my daily work.
