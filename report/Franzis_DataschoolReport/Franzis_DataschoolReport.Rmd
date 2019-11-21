@@ -49,7 +49,7 @@ My current project is analysing still images of the seafloor on seamounts south 
 
 In total 6100 images have been selected for annotation which is done in separate software and still ongoing. To date `r nrow(PCcoverbyImage)` images have been annotated for percent cover of substrate types in TransectMeasure software from [SEAGIS](https://www.seagis.com.au/), and `r nrow(VMEannoMatrix)` have been annotated for VME taxa in the CSIRO insidence of the MBARI developed Video Annotation and Registration System ([VARS](http://vars.it.csiro.au/)). 
 
-Combinig the percent cover and density data into a by-image data matrix is a useful output for taking the data into [QGIS](https://qgis.org/en/site/) for mapping visualisations.
+Combinig the percent cover and density data into a by-image data matrix, which although not an officially tidy format is a useful output for taking the data into [QGIS](https://qgis.org/en/site/) for mapping visualisations.
 
 
 ```{r Combine_Anno, echo=T}
@@ -198,7 +198,7 @@ CoralPC %>%
 
 The depth distribution of the coral matrix is clearly limited to between ~800 and ~1600m depth, with the live corals limited to ~900 to 1300m (Figure \@ref(fig:MyFig1)0. The percent cover of live coral is mostly below 25% while dead coral regularly reaches 100% coverage (Figure \@ref(fig:MyFig2)).
 
-The density data distribution shows the typical 
+The density data distribution shows the typical high frequency of low densities and a rapid decrease and long tail of higher densities of animals in the quadrats. 
 
 ```{r MyFig3, fig.align='center', fig.height= 4, fig.width=6,  fig.cap="**Frequency distribution of total density of VME taxa only "}
 # looking at the distribution of density and number of taxa over the whole data set note non-VME taxa are commented out
