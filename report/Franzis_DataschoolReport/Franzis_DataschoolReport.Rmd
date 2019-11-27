@@ -184,33 +184,38 @@ plot_grid(Plot1, Plot2, ncol=1, labels = c('A', 'B'))
 
 ```
 
-```{r MyFig2,  out.width='100%', fig.align='center', fig.height= 2, fig.width=6, fig.cap="Frequency distrbution histograms of % cover recorded for coral matrix and rubble"}
+The depth distribution of the coral matrix is clearly limited to between ~800 and ~1600m depth, with the live corals limited to ~900 to 1300m (Figure \@ref(fig:MyFig1). The percent cover of live coral is mostly below 25% while dead coral regularly reaches 100% coverage (Figure \@ref(fig:MyFig1)).
 
-CoralPC <- PC_cover %>% 
-  filter(L2_Code == "SC-SOL" |
-         L2_Code == "SU-SOL" )
+The density data distribution of VME taxa shows the typical high frequency of low densities and a rapid decrease and long tail of higher densities of animals in the quadrats (Figure \@ref(fig:MyFig2)). 
 
-CoralPC %>% 
-  ggplot(aes(x = PC_cover)) +
-  facet_wrap(~ L2_Code) +
-  geom_histogram()
-```
-
-The depth distribution of the coral matrix is clearly limited to between ~800 and ~1600m depth, with the live corals limited to ~900 to 1300m (Figure \@ref(fig:MyFig1)0. The percent cover of live coral is mostly below 25% while dead coral regularly reaches 100% coverage (Figure \@ref(fig:MyFig2)).
-
-The density data distribution shows the typical high frequency of low densities and a rapid decrease and long tail of higher densities of animals in the quadrats. 
-
-```{r MyFig3, fig.align='center', fig.height= 4, fig.width=6,  fig.cap="**Frequency distribution of total density of VME taxa only "}
+```{r MyFig2, fig.align='center', fig.height= 4, fig.width=6,  fig.cap="Frequency distribution of total density of VME taxa only "}
 # looking at the distribution of density and number of taxa over the whole data set note non-VME taxa are commented out
 
 VMEonly_TotDens %>% 
   ggplot(aes(x = VMEtaxaDens))+
-  geom_histogram()
+  geom_histogram()+
+  labs(x="density of VME taxa (ind./m2)", y="count")
 
 
 ```
+The importance of coral matrix as a substrate for various VME taxa is of particular importance, because the matrix is vulnerable to damage and removal by fishing using demersal trawls. Figure \@ref(fig:MyFig3) shows the relationship between the density of the measured VME taxa and the percent cover of coral matrix substrate.
 
+```{r MyFig3, fig.align='center', fig.height= 4, fig.width=10,  fig.cap="Relationship between the density of idividual VME taxa and the percent cover of matrix forming coral"}
 
+VMEanno_DensQ %>% 
+  left_join(PCcoverbyImage, by=c("image_key"="image_key")) %>% 
+  filter((`SC-SOL`+`SU-SOL`) != 0 &
+        CONCEPT != "Hydrocorals" &
+        CONCEPT != "True anemones: Fourlobed" &
+        CONCEPT != "No-VMEfauna" ) %>% 
+    ggplot(mapping = aes(x= (`SC-SOL`+`SU-SOL`), 
+                     y= Dens
+                     ))+
+   geom_point()+
+  labs(x="% cover coral matrix (dead and alive)", y="density of VME taxa (ind./m2)")+
+  facet_wrap(~CONCEPT, scales = "free_y")
+
+```
 
 # My Digital Toolbox
 
@@ -229,14 +234,16 @@ Having automated processing into consistent data outputs facilitates data visual
 
 # My time went
 
-Much of my time was spent creating scripts for tidying up the data outputs from TransectMesure andVARS into a format that is amenable for analysis and plotting in R and input to QGIS.
+Much of my time was spent creating scripts for tidying up the data outputs from TransectMesure and VARS into a format that is amenable for analysis and plotting in R and input to QGIS.
 
 # Next steps
 
-In the near future I want to hone my skills in using R for data wrangling and tidying futher for use with my image data projects, and introduce some of these tools into our workflow. 
-I want to apply my new skills to understand and use R projects, BitBucket repositories and Markdown documents colleagues have ceated under another project I am involved in. This will hopefully lead to my taking over some of the tasks previously done by my colleagues. 
-I can see the potential in using R and Markdown for new work we have identified in my team, creating a series of 'reports' all following the same outline and template. I am keen to further explore this further.
+In the near future I want to hone my skills in using R for data wrangling and tidying futher for use with my image data projects, and introduce some of these tools into the workflow for my team. 
+I want to apply my new skills to understand and use R projects, BitBucket repositories and Markdown documents my colleagues have ceated under another project I am involved in. This will hopefully lead to my taking over some of the tasks previously done by my colleagues. 
+Finally, I can see the potential in using R and Markdown for new work we have identified in my team: creating a series of descriptions of putative octocoral species, with linkages to photographs and CAAB records, all following the same outline and template. I am keen to explore creating these using a tempate in R, using Markdown.
+
+Data School also introduced me to the usefulness of the CSIRO Research Data Planner - a tool that I intend to employ in current and furture projects.
 
 # My Data School Experience
 
-I liked the format of Data School, it allowed me to get past my initial hesitations about using R andthe code based environment. As mentioned throughout this document, I an see many applications of my new found knowledge in my daily work.
+I liked the format of Data School, it allowed me to get past my initial hesitations about using R and the code based environment. As mentioned throughout this document, I can see many applications of my new found knowledge in my daily work.
