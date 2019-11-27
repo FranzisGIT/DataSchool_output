@@ -130,7 +130,8 @@ VME_AnnoAll <- PCcoverbyImage %>%
 ```{r myTable1, out.width='100%', echo = T}
 #Reading out the first 5 lines of the data
 kable(head(VME_AnnoAll, n=5), caption ="Combined data matrix (by image) of percent substrate types and VME taxon densities, including the summaries of densities") %>% 
-  kable_styling("striped")
+  kable_styling("striped") %>% 
+  scroll_box(width = "100%")
 
 ```
 
